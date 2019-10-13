@@ -5,13 +5,25 @@ type Item struct {
 	sellIn, quality int
 }
 
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+
+//UpdateQuality ...
 func UpdateQuality(items []*Item) {
 	for i := 0; i < len(items); i++ {
 
 		if items[i].name != "Aged Brie" && items[i].name != "Backstage passes to a TAFKAL80ETC concert" {
 			if items[i].quality > 0 {
 				if items[i].name != "Sulfuras, Hand of Ragnaros" {
-					items[i].quality = items[i].quality - 1
+					if items[i].name != "Conjured Mana Cake" {
+						items[i].quality = items[i].quality - 1
+					} else {
+						items[i].quality = max(items[i].quality-2, 0)
+					}
 				}
 			}
 		} else {
@@ -41,7 +53,12 @@ func UpdateQuality(items []*Item) {
 				if items[i].name != "Backstage passes to a TAFKAL80ETC concert" {
 					if items[i].quality > 0 {
 						if items[i].name != "Sulfuras, Hand of Ragnaros" {
-							items[i].quality = items[i].quality - 1
+							if items[i].name != "Conjured Mana Cake" {
+								items[i].quality = items[i].quality - 1
+							} else {
+								items[i].quality = max(items[i].quality-2, 0)
+							}
+
 						}
 					}
 				} else {
